@@ -11,19 +11,28 @@ public class Board {
     private Player currentPlayer;
     private Player winner;
     private Player board[][];
+    private int scoreboard[][];
 
     public Board(){
         board = new Player[3][3];
+        scoreboard = new int[2][3];
         initBoard();
         winner = null;
         currentPlayer = Player.X;
     }
 
     private void initBoard(){
+        // Initialize game board
         for (int i = 0; i < 3; i++)
             for(int j = 0; j < 3; j++)
                 board[i][j] = Player.NONE;
 
+        // Initialize scoreboard
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 3; j++) {
+                scoreboard[i][j] = 0;
+            }
+        }
     }
 
     public void playMove(int row, int col) throws InvalidMoveException {
@@ -44,10 +53,14 @@ public class Board {
         }else{
             board[row][col] = currentPlayer;
 
-            if (hasWon(row, col))
+            if (hasWon(row, col)) {
                 winner = currentPlayer;
-            else if (hasTie())
+                updateScoreboard(winner);
+            }
+            else if (hasTie()) {
                 winner = Player.NONE;
+                updateScoreboard(winner);
+            }
             else if(currentPlayer == Player.X)
                 currentPlayer = Player.O;
             else
@@ -56,6 +69,20 @@ public class Board {
 
     }
 
+    private void updateScoreboard(Player winner) {
+        if (winner == Player.NONE) {
+            scoreboard[0][2] += 1;
+            scoreboard[1][2] += 1;
+        }
+        else if (winner == Player.O) {
+            scoreboard[0][0] += 1;
+            scoreboard[1][1] += 1;
+        }
+        else if (winner == Player.X) {
+            scoreboard[0][1] += 1;
+            scoreboard[1][0] += 1;
+        }
+    }
 
     private boolean isSquareAvailable(int row, int col){
         return (board[row][col] != Player.X && board[row][col] != Player.O);
@@ -125,6 +152,21 @@ public class Board {
             }
             System.out.println("----------");
         }
+        printScoreboard();
+    }
+
+    public void printScoreboard() {
+        System.out.println("----------");
+        System.out.print("Player O: ");
+        System.out.print("\twin:" + scoreboard[0][0]);
+        System.out.print("\tlose:" + scoreboard[0][1]);
+        System.out.println("\ttie:" + scoreboard[0][2]);
+
+        System.out.print("Player X: ");
+        System.out.print("\twin:" + scoreboard[1][0]);
+        System.out.print("\tlose:" + scoreboard[1][1]);
+        System.out.println("\ttie:" + scoreboard[1][2]);
+        System.out.println("----------");
     }
 
     public Player getCurrentPlayer() {
