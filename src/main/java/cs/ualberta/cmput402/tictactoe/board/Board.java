@@ -46,6 +46,8 @@ public class Board {
 
             if (hasWon(row, col))
                 winner = currentPlayer;
+            else if (hasTie())
+                winner = Player.NONE;
             else if(currentPlayer == Player.X)
                 currentPlayer = Player.O;
             else
@@ -91,6 +93,15 @@ public class Board {
         }
 
         return false;
+    }
+
+    public boolean hasTie(){
+        for (int i = 0; i < 3; i++)
+            for(int j = 0; j < 3; j++)
+                if (board[i][j] == Player.NONE) {
+                    return false;
+                }
+        return true;
     }
 
     private boolean isOnRightDiag(int col, int row){
