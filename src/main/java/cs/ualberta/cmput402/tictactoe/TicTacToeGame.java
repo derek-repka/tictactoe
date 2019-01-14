@@ -46,7 +46,13 @@ public class TicTacToeGame {
         }
 
         board.printBoard();
-        System.out.println("Player " + board.getWinner() + " has won the game!");
+
+        if (board.getWinner() == Player.NONE) {
+            System.out.println("This is a tie!");
+        }
+        else {
+            System.out.println("Player " + board.getWinner() + " has won the game!");
+        }
     }
 
     public static void main(String args[]){
