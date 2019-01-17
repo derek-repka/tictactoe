@@ -98,8 +98,29 @@ public class TicTacToeGame {
         System.out.println("------------------------------");
     }
 
+    public void clearBoard() {
+        board = new Board();
+    }
+
     public static void main(String args[]){
         TicTacToeGame game = new TicTacToeGame();
-        game.playGame();
+
+        String playAgain = "y";
+        while (playAgain.equals("y") || playAgain.equals("Y")) {
+            game.playGame();
+
+            System.out.println("Do you want to play again? (y/n)");
+            Scanner keyboardScanner = new Scanner(System.in);
+
+            playAgain = "";
+            while (!playAgain.equals("Y") && !playAgain.equals("y")
+                    && !playAgain.equals("N") && !playAgain.equals("n")) {
+                playAgain = keyboardScanner.nextLine();
+                System.out.println("play again: " + playAgain);
+
+            }
+
+            game.clearBoard();
+        }
     }
 }
