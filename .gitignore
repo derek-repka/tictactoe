@@ -27,3 +27,6 @@ hs_err_pid*
 
 # ignore file: TicTacToe.iml
 TicTacToe.iml
+
+# ignore target folder
+target/
