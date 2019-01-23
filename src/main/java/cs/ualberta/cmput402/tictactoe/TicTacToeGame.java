@@ -115,7 +115,6 @@ public class TicTacToeGame {
             while (!playAgain.equals("y") && !playAgain.equals("n")) {
                 System.out.println("Do you want to play again? (y/n)");
                 playAgain = keyboardScanner.nextLine().toLowerCase();
-                System.out.println("play again: " + playAgain);
             }
 
             game.clearBoard();
