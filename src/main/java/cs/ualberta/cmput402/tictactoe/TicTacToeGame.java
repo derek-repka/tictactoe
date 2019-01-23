@@ -71,21 +71,21 @@ public class TicTacToeGame {
 
     private void updateScoreboard(Player winner) {
         if (winner == Player.NONE) {
-            scoreboard[0][2] += 1;
-            scoreboard[1][2] += 1;
+            scoreboard[0][2] += 1;  // Update tie
+            scoreboard[1][2] += 1;  // Update tie
         }
         else if (winner == Player.O) {
-            scoreboard[0][0] += 1;
-            scoreboard[1][1] += 1;
+            scoreboard[0][0] += 1;  // Update O win
+            scoreboard[1][1] += 1;  // Update X lose
         }
         else if (winner == Player.X) {
-            scoreboard[0][1] += 1;
-            scoreboard[1][0] += 1;
+            scoreboard[0][1] += 1;  // Update X win
+            scoreboard[1][0] += 1;  // Update O lose
         }
     }
 
     public void printScoreboard() {
-        System.out.println("----------Scoreboard----------");
+        System.out.println("-------------Scoreboard--------------");
         System.out.print("Player O: ");
         System.out.print("\twin:" + scoreboard[0][0]);
         System.out.print("\tlose:" + scoreboard[0][1]);
@@ -95,7 +95,7 @@ public class TicTacToeGame {
         System.out.print("\twin:" + scoreboard[1][0]);
         System.out.print("\tlose:" + scoreboard[1][1]);
         System.out.println("\ttie:" + scoreboard[1][2]);
-        System.out.println("------------------------------");
+        System.out.println("-------------------------------------");
     }
 
     public void clearBoard() {
@@ -106,17 +106,15 @@ public class TicTacToeGame {
         TicTacToeGame game = new TicTacToeGame();
 
         String playAgain = "y";
-        while (playAgain.equals("y") || playAgain.equals("Y")) {
+        while (playAgain.equals("y")) {
             game.playGame();
 
             Scanner keyboardScanner = new Scanner(System.in);
 
             playAgain = "";
-            while (!playAgain.equals("Y") && !playAgain.equals("y")
-                    && !playAgain.equals("N") && !playAgain.equals("n")) {
+            while (!playAgain.equals("y") && !playAgain.equals("n")) {
                 System.out.println("Do you want to play again? (y/n)");
-                playAgain = keyboardScanner.nextLine();
-                System.out.println("play again: " + playAgain);
+                playAgain = keyboardScanner.nextLine().toLowerCase();
             }
 
             game.clearBoard();
