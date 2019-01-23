@@ -85,7 +85,7 @@ public class TicTacToeGame {
     }
 
     public void printScoreboard() {
-        System.out.println("----------Scoreboard----------");
+        System.out.println("-------------Scoreboard--------------");
         System.out.print("Player O: ");
         System.out.print("\twin:" + scoreboard[0][0]);
         System.out.print("\tlose:" + scoreboard[0][1]);
@@ -95,7 +95,7 @@ public class TicTacToeGame {
         System.out.print("\twin:" + scoreboard[1][0]);
         System.out.print("\tlose:" + scoreboard[1][1]);
         System.out.println("\ttie:" + scoreboard[1][2]);
-        System.out.println("------------------------------");
+        System.out.println("-------------------------------------");
     }
 
     public void clearBoard() {
