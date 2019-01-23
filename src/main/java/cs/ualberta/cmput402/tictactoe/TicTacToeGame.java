@@ -71,16 +71,16 @@ public class TicTacToeGame {
 
     private void updateScoreboard(Player winner) {
         if (winner == Player.NONE) {
-            scoreboard[0][2] += 1;
-            scoreboard[1][2] += 1;
+            scoreboard[0][2] += 1;  // Update tie
+            scoreboard[1][2] += 1;  // Update tie
         }
         else if (winner == Player.O) {
-            scoreboard[0][0] += 1;
-            scoreboard[1][1] += 1;
+            scoreboard[0][0] += 1;  // Update O win
+            scoreboard[1][1] += 1;  // Update X lose
         }
         else if (winner == Player.X) {
-            scoreboard[0][1] += 1;
-            scoreboard[1][0] += 1;
+            scoreboard[0][1] += 1;  // Update X win
+            scoreboard[1][0] += 1;  // Update O lose
         }
     }
 
