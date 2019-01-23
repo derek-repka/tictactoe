@@ -106,16 +106,15 @@ public class TicTacToeGame {
         TicTacToeGame game = new TicTacToeGame();
 
         String playAgain = "y";
-        while (playAgain.equals("y") || playAgain.equals("Y")) {
+        while (playAgain.equals("y")) {
             game.playGame();
 
             Scanner keyboardScanner = new Scanner(System.in);
 
             playAgain = "";
-            while (!playAgain.equals("Y") && !playAgain.equals("y")
-                    && !playAgain.equals("N") && !playAgain.equals("n")) {
+            while (!playAgain.equals("y") && !playAgain.equals("n")) {
                 System.out.println("Do you want to play again? (y/n)");
-                playAgain = keyboardScanner.nextLine();
+                playAgain = keyboardScanner.nextLine().toLowerCase();
                 System.out.println("play again: " + playAgain);
             }
 
