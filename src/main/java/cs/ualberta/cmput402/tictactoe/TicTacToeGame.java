@@ -12,9 +12,20 @@ import java.util.Scanner;
 public class TicTacToeGame {
 
     private Board board;
+    private int scoreboard[][];
 
     public TicTacToeGame(){
         board = new Board();
+        scoreboard = new int[2][3];
+        initTicTacToeGame();
+    }
+
+    private void initTicTacToeGame(){
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 3; j++) {
+                scoreboard[i][j] = 0;
+            }
+        }
     }
 
     public void promptNextPlayer(){
@@ -44,13 +55,69 @@ public class TicTacToeGame {
                 promptNextPlayer();
             }
         }
-
         board.printBoard();
-        System.out.println("Player " + board.getWinner() + " has won the game!");
+
+        updateScoreboard(board.getWinner());
+
+        if (board.getWinner() == Player.NONE) {
+            System.out.println("This is a tie!");
+        }
+        else {
+            System.out.println("Player " + board.getWinner() + " has won the game!");
+        }
+
+        printScoreboard();
+    }
+
+    private void updateScoreboard(Player winner) {
+        if (winner == Player.NONE) {
+            scoreboard[0][2] += 1;  // Update tie
+            scoreboard[1][2] += 1;  // Update tie
+        }
+        else if (winner == Player.O) {
+            scoreboard[0][0] += 1;  // Update O win
+            scoreboard[1][1] += 1;  // Update X lose
+        }
+        else if (winner == Player.X) {
+            scoreboard[0][1] += 1;  // Update X win
+            scoreboard[1][0] += 1;  // Update O lose
+        }
+    }
+
+    public void printScoreboard() {
+        System.out.println("-------------Scoreboard--------------");
+        System.out.print("Player O: ");
+        System.out.print("\twin:" + scoreboard[0][0]);
+        System.out.print("\tlose:" + scoreboard[0][1]);
+        System.out.println("\ttie:" + scoreboard[0][2]);
+
+        System.out.print("Player X: ");
+        System.out.print("\twin:" + scoreboard[1][0]);
+        System.out.print("\tlose:" + scoreboard[1][1]);
+        System.out.println("\ttie:" + scoreboard[1][2]);
+        System.out.println("-------------------------------------");
+    }
+
+    public void clearBoard() {
+        board = new Board();
     }
 
     public static void main(String args[]){
         TicTacToeGame game = new TicTacToeGame();
-        game.playGame();
+
+        String playAgain = "y";
+        while (playAgain.equals("y")) {
+            game.playGame();
+
+            Scanner keyboardScanner = new Scanner(System.in);
+
+            playAgain = "";
+            while (!playAgain.equals("y") && !playAgain.equals("n")) {
+                System.out.println("Do you want to play again? (y/n)");
+                playAgain = keyboardScanner.nextLine().toLowerCase();
+            }
+
+            game.clearBoard();
+        }
     }
 }
